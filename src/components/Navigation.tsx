@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "flex-end",
       padding: theme.spacing(0, 1),
       ...theme.mixins.toolbar,
-      background: `linear-gradient(270deg, ${theme.palette.primary.main} 0%, ${theme.palette.background.default} 70%);`,
+      background: theme.palette.primary.main,
     },
   })
 );

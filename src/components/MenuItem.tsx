@@ -12,7 +12,7 @@ import {
   createStyles,
 } from "@material-ui/core";
 import DefaultIcon from "@material-ui/icons/FileCopy";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // models
 import RouteItem from "../model/RouteItem.model";
@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
     selected: {
       transition: "box-shadow",
       transitionDuration: "1s",
-      boxShadow: `0 0 3px ${theme.palette.primary.main}, 0 0 9px ${theme.palette.primary.main}, 0 0 11px ${theme.palette.primary.main}, 0 0 30px ${theme.palette.primary.main}`,
+      fontWeight: "bolder",
+      backgroundColor: theme.palette.action.hover
     },
     nested: {
       marginLeft: theme.spacing(2),
@@ -36,12 +37,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface MenuItemProps {
   route: RouteItem;
+  selected: boolean;
 }
 
 // functional component
-const MenuItem = ({ route }: MenuItemProps) => {
+const MenuItem = ({ route, selected }: MenuItemProps) => {
   const classes = useStyles();
-  const location = useLocation();
+  // const location = useLocation();
 
   const handleNavigate = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -60,12 +62,12 @@ const MenuItem = ({ route }: MenuItemProps) => {
       })}
     >
       <Tooltip title={route.tooltip || ""} placement="right">
-        <ListItem button disabled={!route.enabled}>
+        <ListItem button disabled={!route.enabled} className={clsx({
+                [classes.selected]: selected,
+              })}>
           <ListItemIcon>
             <IconButton
-              className={clsx({
-                [classes.selected]: location.pathname === route.path,
-              })}
+              
               size="small"
             >
               <Icon component={route.icon || DefaultIcon} />

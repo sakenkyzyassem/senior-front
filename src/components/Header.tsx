@@ -4,14 +4,15 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Tooltip,
+  //Tooltip,
   createStyles,
   makeStyles,
   Theme,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import Brightness3Icon from "@material-ui/icons/Brightness3";
+// import SearchIcon from '@material-ui/icons/Search';
+// import Brightness7Icon from "@material-ui/icons/Brightness7";
+// import Brightness3Icon from "@material-ui/icons/Brightness3";
 import UserIcon from "@material-ui/icons/AccountCircle";
 
 // constants
@@ -22,18 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
     },
     appBarShift: {
       marginLeft: DRAWER_WIDTH,
       width: `calc(100% - ${DRAWER_WIDTH}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
     },
     toolbar: {
       flex: 1,
@@ -60,21 +53,20 @@ const useStyles = makeStyles((theme: Theme) =>
 interface HeaderProps {
   open: boolean;
   handleMenuOpen: () => void;
-  toggleTheme: () => void;
-  useDefaultTheme: boolean;
+  toggleTheme?: () => void;
+  useDefaultTheme?: boolean;
 }
 
 const Header = ({
   open,
   handleMenuOpen,
-  toggleTheme,
-  useDefaultTheme,
+  //toggleTheme,
+  //useDefaultTheme,
 }: HeaderProps) => {
   const classes = useStyles();
   return (
     <AppBar
       position="fixed"
-      elevation={0}
       className={clsx(classes.appBar, {
         [classes.appBarShift]: open,
       })}
@@ -97,7 +89,7 @@ const Header = ({
             {APP_TITLE}
           </Typography>
         </div>
-        <IconButton onClick={toggleTheme}>
+        {/* <IconButton onClick={toggleTheme}>
           {useDefaultTheme ? (
             <Tooltip title="Switch to dark mode" placement="bottom">
               <Brightness3Icon />
@@ -107,7 +99,7 @@ const Header = ({
               <Brightness7Icon />
             </Tooltip>
           )}
-        </IconButton>
+        </IconButton> */}
         <IconButton size="small" color="inherit">
           <UserIcon />
         </IconButton>

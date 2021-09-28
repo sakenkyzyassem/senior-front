@@ -1,6 +1,6 @@
 // APP TEXT
-export const APP_TITLE = "Welcome, Developer - React Boilerplate App";
-export const FOOTER_TEXT = `${new Date().getFullYear()} Proudly made in New Zealand ♡ by Welcome, Developer`;
+export const APP_TITLE = "Project Stars";
+export const FOOTER_TEXT = `${new Date().getFullYear()} made for Senior Project course`;
 // PAGES TITLE
 export const PAGE_TITLE_HOME = "Home";
 export const PAGE_TITLE_DASHBOARD = "Dashboard";

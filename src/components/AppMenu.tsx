@@ -1,5 +1,5 @@
 import { useState } from "react";
-import clsx from "clsx";
+// import clsx from "clsx";
 import {
   List,
   Divider,
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
     },
     selected: {
-      transition: "box-shadow",
       transitionDuration: "1s",
-      boxShadow: `0 0 3px ${theme.palette.primary.main}, 0 0 9px ${theme.palette.primary.main}, 0 0 11px ${theme.palette.primary.main}, 0 0 30px ${theme.palette.primary.main}`,
+      background: theme.palette.primary.light,
+      color: 'white'
     },
   })
 );
@@ -65,13 +65,6 @@ const Menu = () => {
               <ListItem button onClick={handleClick}>
                 <ListItemIcon>
                   <IconButton
-                    className={clsx({
-                      [classes.selected]:
-                        !open &&
-                        route.subRoutes.some(
-                          (item: RouteItem) => item.path === location.pathname
-                        ),
-                    })}
                     size="small"
                   >
                     <Icon component={route.icon || DefaultIcon} />
@@ -88,13 +81,13 @@ const Menu = () => {
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List className={classes.nested}>
                   {route.subRoutes.map((sRoute: RouteItem) => (
-                    <MenuItem key={`${sRoute.key}`} route={sRoute} />
+                    <MenuItem key={`${sRoute.key}`} route={sRoute} selected={ sRoute.path === location.pathname}/>
                   ))}
                 </List>
               </Collapse>
             </>
           ) : (
-            <MenuItem key={route.key} route={route} />
+            <MenuItem key={route.key} route={route} selected={ route.path === location.pathname} />
           )}
           {route.appendDivider && <Divider className={classes.divider} />}
         </>

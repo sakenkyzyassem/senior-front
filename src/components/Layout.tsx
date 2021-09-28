@@ -37,10 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
     },
     contentShift: {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
       marginLeft: DRAWER_WIDTH,
     },
   })
@@ -48,15 +44,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 // define interface to represent component props
 interface LayoutProps {
-  toggleTheme: () => void;
-  useDefaultTheme: boolean;
+  toggleTheme?: () => void;
+  useDefaultTheme?: boolean;
   children: ReactNode;
 }
 
 // functional component
 const Layout: FC<LayoutProps> = ({
-  toggleTheme,
-  useDefaultTheme,
+  //toggleTheme,
+  //useDefaultTheme,
   children,
 }: LayoutProps) => {
   const classes = useStyles();
@@ -67,8 +63,8 @@ const Layout: FC<LayoutProps> = ({
       <Header
         open={open}
         handleMenuOpen={toggle}
-        toggleTheme={toggleTheme}
-        useDefaultTheme={useDefaultTheme}
+        //toggleTheme={toggleTheme}
+        //useDefaultTheme={useDefaultTheme}
       />
       <Navigation open={open} handleMenuClose={toggle} />
       <main
