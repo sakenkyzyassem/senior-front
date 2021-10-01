@@ -8,15 +8,17 @@ import {
   createStyles,
   makeStyles,
   Theme,
+  Popover,
+  Button,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-// import SearchIcon from '@material-ui/icons/Search';
-// import Brightness7Icon from "@material-ui/icons/Brightness7";
-// import Brightness3Icon from "@material-ui/icons/Brightness3";
 import UserIcon from "@material-ui/icons/AccountCircle";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import SearchIcon from "@material-ui/icons/Search";
 
 // constants
 import { APP_TITLE, DRAWER_WIDTH } from "../utils/constants";
+import React, { useState } from "react";
 
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,6 +48,30 @@ const useStyles = makeStyles((theme: Theme) =>
     hide: {
       display: "none",
     },
+    headerButton: {
+      marginRight: 15,
+      marginLeft: 15,
+    },
+    profilePopoverUsernameContainer: {
+      width: "250px",
+      height: "60px",
+      borderBottom: "1px solid #eee",
+    },
+    profilePopoverUsername: {
+      marginLeft: 10,
+      marginTop: 10,
+      fontSize: 20,
+    },
+    profilePopoverLink: {
+      marginLeft: 10,
+      fontSize: 12,
+      textDecoration: "none",
+      color: "grey",
+    },
+    logoutButton: {
+      marginLeft: 5,
+      color: "#5600E8",
+    }
   })
 );
 
@@ -60,10 +86,14 @@ interface HeaderProps {
 const Header = ({
   open,
   handleMenuOpen,
-  //toggleTheme,
-  //useDefaultTheme,
 }: HeaderProps) => {
   const classes = useStyles();
+  const [profileAnchor, setprofileAnchor] = useState(null);
+
+  const openProfilePopover = (event: any) => {
+    setprofileAnchor(event.currentTarget);
+  }
+
   return (
     <AppBar
       position="fixed"
@@ -89,20 +119,56 @@ const Header = ({
             {APP_TITLE}
           </Typography>
         </div>
-        {/* <IconButton onClick={toggleTheme}>
-          {useDefaultTheme ? (
-            <Tooltip title="Switch to dark mode" placement="bottom">
-              <Brightness3Icon />
-            </Tooltip>
-          ) : (
-            <Tooltip title="Switch to light mode" placement="bottom">
-              <Brightness7Icon />
-            </Tooltip>
-          )}
-        </IconButton> */}
-        <IconButton size="small" color="inherit">
+        <IconButton 
+          size="small"
+          color="inherit"
+          className={classes.headerButton}>
+          <SearchIcon />
+        </IconButton>
+        <IconButton 
+          size="small"
+          color="inherit"
+          className={classes.headerButton}>
+          <NotificationsIcon />
+        </IconButton>
+        <IconButton 
+          size="small" 
+          color="inherit"
+          className={classes.headerButton}
+          onClick={openProfilePopover}>
           <UserIcon />
         </IconButton>
+        <Popover 
+          open={Boolean(profileAnchor)}
+          anchorEl={profileAnchor}
+          onClose={() => {
+            setprofileAnchor(null);
+          }}
+          anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        > 
+          <div className={classes.profilePopoverUsernameContainer}>
+            <Typography 
+              className={classes.profilePopoverUsername}>
+                Madi Nazarbayev
+            </Typography>
+            <a
+              href="/profile"
+              className={classes.profilePopoverLink}>
+                My profile
+            </a>
+          </div>
+          <div>
+            <Button 
+              className={classes.logoutButton}>Log out</Button>
+          </div>
+        </Popover>
       </Toolbar>
     </AppBar>
   );

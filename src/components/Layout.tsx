@@ -14,6 +14,7 @@ import Footer from "./Footer";
 
 // constants
 import { DRAWER_WIDTH, FOOTER_HEIGHT } from "../utils/constants";
+import React from "react";
 
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
