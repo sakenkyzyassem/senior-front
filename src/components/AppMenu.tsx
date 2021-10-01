@@ -27,6 +27,7 @@ import { routes } from "../config";
 
 // interfaces
 import RouteItem from "../model/RouteItem.model";
+import React from "react";
 
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>

@@ -13,6 +13,7 @@ import AppMenu from "./AppMenu";
 
 // constants
 import { DRAWER_WIDTH } from "../utils/constants";
+import React from "react";
 
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>

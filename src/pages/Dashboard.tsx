@@ -1,24 +1,52 @@
 import { FC, ReactElement } from "react";
 import { Helmet } from "react-helmet";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 
 // components
-import PageTitle from "../components/PageTitle";
 
 // constants
-import { APP_TITLE, PAGE_TITLE_DASHBOARD } from "../utils/constants";
+import { APP_TITLE } from "../utils/constants";
+import React from "react";
+import { Cards } from "../components/Cards";
 
 // define css-in-js
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      flex: 1,
       display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "center",
+      alignItems: "center",
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: "column",
+      }
     },
+    cardsContainer: {
+      flex: 3,
+    },
+    buttonContainer: {
+      flex: 1,
+    }, 
+    button: {
+      backgroundColor: "#6200EE",
+      color: "white",
+      marginLeft: 15,
+    }
   })
 );
+
+const mockData = [
+  {
+    title: "CSCI 390",
+    name: "Artificial Intelligence",
+    description: "Just a course",
+  },
+  {
+    title: "CSCI 269",
+    name: "Human Intelligence",
+    description: "Mock a course",
+  }
+];
 
 const Dashboard: FC<{}> = (): ReactElement => {
   const classes = useStyles();
@@ -30,7 +58,14 @@ const Dashboard: FC<{}> = (): ReactElement => {
         </title>
       </Helmet>
       <div className={classes.root}>
-        <PageTitle title={PAGE_TITLE_DASHBOARD} />
+        <div className={classes.cardsContainer}>
+          <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
+        </div> 
+        <div className={classes.buttonContainer}>
+          <Button 
+            variant="contained"
+            className={classes.button}>Create new workspace</Button>
+        </div>
       </div>
     </>
   );

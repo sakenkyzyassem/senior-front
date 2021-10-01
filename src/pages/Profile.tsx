@@ -6,7 +6,8 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import PageTitle from "../components/PageTitle";
 
 // constants
-import { APP_TITLE, PAGE_TITLE_CODE } from "../utils/constants";
+import { APP_TITLE, PAGE_TITLE_PROFILE } from "../utils/constants";
+import React from "react";
 
 // define css-in-js
 const useStyles = makeStyles(() =>
@@ -20,20 +21,20 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const CodeEditor: FC<{}> = (): ReactElement => {
+const Dashboard: FC<{}> = (): ReactElement => {
   const classes = useStyles();
   return (
     <>
       <Helmet>
         <title>
-          {PAGE_TITLE_CODE} | {APP_TITLE}
+          {} | {APP_TITLE}
         </title>
       </Helmet>
       <div className={classes.root}>
-        <PageTitle title={PAGE_TITLE_CODE} />
+        <PageTitle title={PAGE_TITLE_PROFILE} />
       </div>
     </>
   );
 };
 
-export default CodeEditor;
+export default Dashboard;

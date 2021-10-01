@@ -1,4 +1,5 @@
 import { makeStyles, createStyles, Theme, Link } from "@material-ui/core";
+import React from "react";
 
 // constants
 import { FOOTER_TEXT, FOOTER_HEIGHT } from "../utils/constants";
