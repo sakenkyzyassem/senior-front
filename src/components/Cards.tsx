@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react";
 import Card from "@material-ui/core/Card";
 import { Button, CardActions, CardContent, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -23,6 +23,11 @@ interface Props {
 };
 
 export const Cards = ({title, name, description}: Props) => {
+  const onWorkspaceCardClick = useCallback( () => {
+      console.log('open workspace page');
+    },
+    [],
+  );
     const classes = useStyles();
     return (
         //will need to map through all the courses and generate the following card for each
@@ -39,7 +44,8 @@ export const Cards = ({title, name, description}: Props) => {
             </CardContent>
             <CardActions>
                 <Button size="small"
-                    className={classes.button}>See More</Button>
+                    className={classes.button} onClick={onWorkspaceCardClick}
+                >See More</Button>
             </CardActions>
         </Card>
     )
