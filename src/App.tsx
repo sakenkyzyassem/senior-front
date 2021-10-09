@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet";
 
 // components
 import Layout from "./components/Layout";
+import Login from "./pages/auth/Login";
 
 // theme
 import { lightTheme, darkTheme } from "./theme/appTheme";
@@ -45,6 +46,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <Router>
             <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
               <Layout toggleTheme={toggle} useDefaultTheme={useDefaultTheme}>
                 {/* for each route config, a react route is created */}
                 {routes.map((route: RouteItem) =>
