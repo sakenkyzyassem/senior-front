@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 
 // constants
 import { APP_TITLE } from "../utils/constants";
+import { WorkspaceMeta } from "../utils/types";
 import React from "react";
 import { Cards } from "../components/Cards";
 
@@ -35,16 +36,18 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const mockData = [
+const mockData: WorkspaceMeta[] = [
   {
     title: "CSCI 390",
     name: "Artificial Intelligence",
     description: "Just a course",
+    id: 'workspace001'
   },
   {
     title: "CSCI 269",
     name: "Human Intelligence",
     description: "Mock a course",
+    id: 'workspace002'
   }
 ];
 
