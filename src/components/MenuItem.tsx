@@ -1,39 +1,10 @@
 import React from "react";
-import clsx from "clsx";
-import {
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Icon,
-  Tooltip,
-  IconButton,
-  makeStyles,
-  Theme,
-  createStyles,
-} from "@material-ui/core";
-import DefaultIcon from "@material-ui/icons/FileCopy";
+import { ListItem, ListItemText, ListItemIcon, Icon, Tooltip, IconButton } from "@mui/material";
+import DefaultIcon from "@mui/icons-material/FileCopy";
 import { NavLink } from "react-router-dom";
 
 // models
 import RouteItem from "../model/RouteItem.model";
-
-// define css-in-js
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    selected: {
-      transition: "box-shadow",
-      transitionDuration: "1s",
-      fontWeight: "bolder",
-      backgroundColor: theme.palette.action.hover
-    },
-    nested: {
-      marginLeft: theme.spacing(2),
-    },
-    listItemDisabled: {
-      cursor: "not-allowed",
-    },
-  })
-);
 
 interface MenuItemProps {
   route: RouteItem;
@@ -42,7 +13,6 @@ interface MenuItemProps {
 
 // functional component
 const MenuItem = ({ route, selected }: MenuItemProps) => {
-  const classes = useStyles();
   // const location = useLocation();
 
   const handleNavigate = (
@@ -54,22 +24,20 @@ const MenuItem = ({ route, selected }: MenuItemProps) => {
   return (
     <NavLink
       to={`${route.path}`}
-      style={{ textDecoration: "none", color: "inherit" }}
+      style={route.enabled ? { textDecoration: "none", color: "inherit" } 
+      : {textDecoration: "none", color: "inherit", cursor: "none"}}
       key={route.key}
       onClick={handleNavigate}
-      className={clsx({
-        [classes.listItemDisabled]: !route.enabled,
-      })}
     >
       <Tooltip title={route.tooltip || ""} placement="right">
-        <ListItem button disabled={!route.enabled} className={clsx({
-                [classes.selected]: selected,
-              })}>
+        <ListItem button disabled={!route.enabled} sx={selected ? {
+          transition: "box-shadow",
+          transitionDuration: "1s",
+          fontWeight: "bolder",
+          backgroundColor: 'action.hover'
+        } : {}}>
           <ListItemIcon>
-            <IconButton
-              
-              size="small"
-            >
+            <IconButton size="small">
               <Icon component={route.icon || DefaultIcon} />
             </IconButton>
           </ListItemIcon>

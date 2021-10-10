@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 import { Helmet } from "react-helmet";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
+import styled from 'styled-components';
 
 // components
 
@@ -12,29 +12,12 @@ import React from "react";
 import { Cards } from "../components/Cards";
 
 // define css-in-js
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      [theme.breakpoints.down('sm')]: {
-        flexDirection: "column",
-      }
-    },
-    cardsContainer: {
-      flex: 3,
-    },
-    buttonContainer: {
-      flex: 1,
-    }, 
-    button: {
-      backgroundColor: "#6200EE",
-      color: "white",
-      marginLeft: 15,
-    }
-  })
-);
+const Root = styled.div`
+      display: flex;
+      justify-content: center;
+      align-items: center;`;
+const CardsContainer = styled.div`flex: 3;`;
+const ButtonContainer = styled.div`flex: 1;`;
 
 const mockData: WorkspaceMeta[] = [
   {
@@ -52,7 +35,6 @@ const mockData: WorkspaceMeta[] = [
 ];
 
 const Dashboard: FC<{}> = (): ReactElement => {
-  const classes = useStyles();
   return (
     <>
       <Helmet>
@@ -60,16 +42,14 @@ const Dashboard: FC<{}> = (): ReactElement => {
           {} | {APP_TITLE}
         </title>
       </Helmet>
-      <div className={classes.root}>
-        <div className={classes.cardsContainer}>
+      <Root>
+        <CardsContainer>
           <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
-        </div> 
-        <div className={classes.buttonContainer}>
-          <Button 
-            variant="contained"
-            className={classes.button}>Create new workspace</Button>
-        </div>
-      </div>
+        </CardsContainer> 
+        <ButtonContainer>
+          <Button variant="contained" fullWidth>Create new workspace</Button>
+        </ButtonContainer>
+      </Root>
     </>
   );
 };

@@ -1,12 +1,15 @@
-import { createMuiTheme, Theme } from "@material-ui/core";
-import { pink } from "@material-ui/core/colors";
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { deepPurple, pink } from '@mui/material/colors';
 
-// define light theme colors
-export const lightTheme: Theme = createMuiTheme({
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+let theme = createTheme({
   palette: {
-    type: "light",
     primary: {
-      main: '#6e2cfa',
+      main: deepPurple[500],
     },
     secondary: {
       main: pink[300],
@@ -14,15 +17,6 @@ export const lightTheme: Theme = createMuiTheme({
   },
 });
 
-// define dark theme colors
-export const darkTheme: Theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: pink[300],
-    },
-    secondary: {
-      main: '#6e2cfa',
-    },
-  },
-});
+theme = responsiveFontSizes(theme);
+
+export default theme;

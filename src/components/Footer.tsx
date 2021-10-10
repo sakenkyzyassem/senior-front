@@ -1,39 +1,29 @@
-import { makeStyles, createStyles, Theme, Link } from "@material-ui/core";
+import { Link } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 
 // constants
 import { FOOTER_TEXT, FOOTER_HEIGHT } from "../utils/constants";
 
-// define css-in-js
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      background: theme.palette.background.paper,
-      minHeight: FOOTER_HEIGHT,
-    },
-    footer: {
-      textTransform: "uppercase",
-    },
-  })
-);
-
 // functional component
 const Footer = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <Box sx={{ 
+      flex: 1, 
+      display: 'flex', 
+      justifyContent: 'center',
+      background: 'background.paper',
+      minHeight: FOOTER_HEIGHT
+    }}>
       <Link
         href={`${process.env.REACT_APP_API_URL}`}
         target="_blank"
         rel="noreferrer"
-        className={classes.footer}
+        sx={{ textTransform: 'uppercase' }}
       >
         {FOOTER_TEXT}
       </Link>
-    </div>
+    </Box>
   );
 };
 

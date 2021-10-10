@@ -10,13 +10,8 @@ import {
   Icon,
   Tooltip,
   IconButton,
-  makeStyles,
-  Theme,
-  createStyles,
-} from "@material-ui/core";
-import DefaultIcon from "@material-ui/icons/FileCopy";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
+} from "@mui/material";
+import { FileCopy as DefaultIcon, ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 
 // components
@@ -29,27 +24,8 @@ import { routes } from "../config";
 import RouteItem from "../model/RouteItem.model";
 import React from "react";
 
-// define css-in-js
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    divider: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-    nested: {
-      marginLeft: theme.spacing(2),
-    },
-    selected: {
-      transitionDuration: "1s",
-      background: theme.palette.primary.light,
-      color: 'white'
-    },
-  })
-);
-
 // functional component
 const Menu = () => {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const location: any = useLocation();
 
@@ -80,7 +56,7 @@ const Menu = () => {
                 </Tooltip>
               </ListItem>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <List className={classes.nested}>
+                <List sx={{ ml: 'spacing(2)' }}>
                   {route.subRoutes.map((sRoute: RouteItem) => (
                     <MenuItem key={`${sRoute.key}`} route={sRoute} selected={ sRoute.path === location.pathname}/>
                   ))}
@@ -90,7 +66,7 @@ const Menu = () => {
           ) : (
             <MenuItem key={route.key} route={route} selected={ route.path === location.pathname} />
           )}
-          {route.appendDivider && <Divider className={classes.divider} />}
+          {route.appendDivider && <Divider sx={{ mt: 'spacing(1)', mb: 'spacing(1)' }} />}
         </>
       ))}
     </List>

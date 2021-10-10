@@ -1,79 +1,26 @@
-import clsx from "clsx";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  //Tooltip,
-  createStyles,
-  makeStyles,
-  Theme,
-  Popover,
-  Button,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import UserIcon from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import SearchIcon from "@material-ui/icons/Search";
+import { AppBar, Toolbar, Box, Typography, IconButton, Popover, Button, Link } from "@mui/material";
+import { 
+  Menu as MenuIcon, 
+  Notifications as NotificationsIcon, 
+  Person as UserIcon,
+  Search as SearchIcon,
+} from "@mui/icons-material";
+import styled from 'styled-components';
 
 // constants
-import { APP_TITLE, DRAWER_WIDTH } from "../utils/constants";
+import { APP_TITLE } from "../utils/constants";
 import React, { useState } from "react";
 
 // define css-in-js
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-    },
-    appBarShift: {
-      marginLeft: DRAWER_WIDTH,
-      width: `calc(100% - ${DRAWER_WIDTH}px)`,
-    },
-    toolbar: {
-      flex: 1,
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    title: {
-      flex: 1,
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    hide: {
-      display: "none",
-    },
-    headerButton: {
-      marginRight: 15,
-      marginLeft: 15,
-    },
-    profilePopoverUsernameContainer: {
+const Title = styled.div`
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center`;
+const ProfilePopoverUsernameContainer = styled.div`
       width: "250px",
       height: "60px",
-      borderBottom: "1px solid #eee",
-    },
-    profilePopoverUsername: {
-      marginLeft: 10,
-      marginTop: 10,
-      fontSize: 20,
-    },
-    profilePopoverLink: {
-      marginLeft: 10,
-      fontSize: 12,
-      textDecoration: "none",
-      color: "grey",
-    },
-    logoutButton: {
-      marginLeft: 5,
-      color: "#5600E8",
-    }
-  })
-);
+      borderBottom: "1px solid #eee"`;
 
 // define interface to represent component props
 interface HeaderProps {
@@ -87,7 +34,6 @@ const Header = ({
   open,
   handleMenuOpen,
 }: HeaderProps) => {
-  const classes = useStyles();
   const [profileAnchor, setprofileAnchor] = useState(null);
 
   const openProfilePopover = (event: any) => {
@@ -97,20 +43,21 @@ const Header = ({
   return (
     <AppBar
       position="fixed"
-      className={clsx(classes.appBar, {
-        [classes.appBarShift]: open,
-      })}
+      sx={{zIndex: 'zIndex.drawer + 1'}}
     >
-      <Toolbar className={classes.toolbar}>
-        <div className={classes.title}>
+      <Toolbar sx={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+      }}>
+        <Title>
           <IconButton
             color="inherit"
             aria-label="open menu"
             onClick={handleMenuOpen}
             edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
+            sx={open ? { mr: 36 } : { mr: 36 }}
             size="small"
           >
             <MenuIcon />
@@ -118,23 +65,24 @@ const Header = ({
           <Typography variant="h6" noWrap>
             {APP_TITLE}
           </Typography>
-        </div>
+        </Title>
+        <Box sx={{ flexGrow: 1 }} />
         <IconButton 
           size="small"
           color="inherit"
-          className={classes.headerButton}>
+          sx={{ mr: 15, ml: 15}} >
           <SearchIcon />
         </IconButton>
         <IconButton 
           size="small"
           color="inherit"
-          className={classes.headerButton}>
+          sx={{ mr: 15, ml: 15}} >
           <NotificationsIcon />
         </IconButton>
         <IconButton 
           size="small" 
           color="inherit"
-          className={classes.headerButton}
+          sx={{ mr: 15, ml: 15}} 
           onClick={openProfilePopover}>
           <UserIcon />
         </IconButton>
@@ -153,20 +101,24 @@ const Header = ({
             horizontal: "right",
           }}
         > 
-          <div className={classes.profilePopoverUsernameContainer}>
-            <Typography 
-              className={classes.profilePopoverUsername}>
+          <ProfilePopoverUsernameContainer>
+            <Typography variant="caption"
+              sx={{ ml: 10, mt: 10 }}>
                 Madi Nazarbayev
             </Typography>
-            <a
+            <Link
               href="/profile"
-              className={classes.profilePopoverLink}>
+              sx={{
+                ml: 10,
+                fontSize: 12,
+                textDecoration: "none",
+                color: "grey",
+              }}>
                 My profile
-            </a>
-          </div>
+            </Link>
+          </ProfilePopoverUsernameContainer>
           <div>
-            <Button 
-              className={classes.logoutButton}>Log out</Button>
+            <Button color="primary" sx={{ ml: 5 }}>Log out</Button>
           </div>
         </Popover>
       </Toolbar>

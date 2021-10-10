@@ -1,11 +1,6 @@
 import { FC, ReactNode, useReducer } from "react";
-import clsx from "clsx";
-import {
-  makeStyles,
-  createStyles,
-  Theme,
-  CssBaseline,
-} from "@material-ui/core";
+import { Toolbar, CssBaseline } from "@mui/material";
+import styled from 'styled-components';
 
 // components
 import Header from "./Header";
@@ -13,35 +8,14 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 // constants
-import { DRAWER_WIDTH, FOOTER_HEIGHT } from "../utils/constants";
+import { FOOTER_HEIGHT } from "../utils/constants";
 import React from "react";
 
 // define css-in-js
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flex: 1,
-      display: "flex",
-      flexDirection: "column",
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      minHeight: `calc(100vh - ${FOOTER_HEIGHT}px)`,
-      background: theme.palette.background.paper,
-      marginLeft: theme.spacing(7) + 1,
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(9) + 1,
-      },
-    },
-    toolbar: {
-      ...theme.mixins.toolbar,
-    },
-    contentShift: {
-      marginLeft: DRAWER_WIDTH,
-    },
-  })
-);
+const Root = styled.div`
+      flex: 1;
+      display: flex;
+      flex-direction: column;`;
 
 // define interface to represent component props
 interface LayoutProps {
@@ -56,10 +30,21 @@ const Layout: FC<LayoutProps> = ({
   //useDefaultTheme,
   children,
 }: LayoutProps) => {
-  const classes = useStyles();
   const [open, toggle] = useReducer((open) => !open, true);
+  let content = {
+    flexGrow: 1,
+    padding: 'spacing(3)',
+    minHeight: `calc(100vh - ${FOOTER_HEIGHT}px)`,
+    background: 'background.paper',
+    marginLeft: 'spacing(7)' + 1,
+    ["sm"]: {
+      marginLeft: 'spacing(9)' + 1,
+    },
+  }; 
+  let Content = styled.main(content
+  );
   return (
-    <div className={classes.root}>
+    <Root>
       <CssBaseline />
       <Header
         open={open}
@@ -68,18 +53,14 @@ const Layout: FC<LayoutProps> = ({
         //useDefaultTheme={useDefaultTheme}
       />
       <Navigation open={open} handleMenuClose={toggle} />
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.toolbar} />
+      <Content>
+        <Toolbar />
         {children}
-      </main>
+      </Content>
       <footer>
         <Footer />
       </footer>
-    </div>
+    </Root>
   );
 };
 

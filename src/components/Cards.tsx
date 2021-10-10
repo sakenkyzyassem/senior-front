@@ -1,26 +1,11 @@
 import React, { useCallback } from "react";
-import Card from "@material-ui/core/Card";
-import { Button, CardActions, CardContent, Typography } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(()=> 
-    createStyles({
-        root: {
-            marginRight: 15,
-            marginLeft: 15,
-            marginBottom: 20,
-        },
-        button: {
-            color: "#5600E8",
-        }
-    })
-);
+import { Card, Button, CardActions, CardContent, Typography } from "@mui/material";
 
 interface Props {
     title: string,
     name: string,
     description: string,
-};
+}
 
 export const Cards = ({title, name, description}: Props) => {
   const onWorkspaceCardClick = useCallback( () => {
@@ -28,10 +13,9 @@ export const Cards = ({title, name, description}: Props) => {
     },
     [],
   );
-    const classes = useStyles();
     return (
         //will need to map through all the courses and generate the following card for each
-        <Card className={classes.root}>
+        <Card sx={{ mr: 15, ml: 15, mb: 20 }} elevation={2}>
             <CardContent>
                 <Typography 
                     variant={"h6"}
@@ -43,8 +27,7 @@ export const Cards = ({title, name, description}: Props) => {
                     variant={"caption"}>{description}</Typography>
             </CardContent>
             <CardActions>
-                <Button size="small"
-                    className={classes.button} onClick={onWorkspaceCardClick}
+                <Button size="small" variant="text" onClick={onWorkspaceCardClick}
                 >See More</Button>
             </CardActions>
         </Card>

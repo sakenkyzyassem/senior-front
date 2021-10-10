@@ -1,19 +1,14 @@
 import React, { useReducer } from "react";
-import {
-  createMuiTheme,
-  Theme,
-  responsiveFontSizes,
-  ThemeProvider,
-} from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { ThemeProvider } from "@mui/material";
 
 // components
 import Layout from "./components/Layout";
 import Login from "./pages/auth/Login";
 
 // theme
-import { lightTheme, darkTheme } from "./theme/appTheme";
+import theme from "./theme/appTheme";
 
 // app routes
 import { routes } from "./config";
@@ -32,10 +27,6 @@ const DefaultComponent = () => <div>No Component Defined.</div>;
 
 function App() {
   const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
-
-  // define custom theme
-  let theme: Theme = createMuiTheme(useDefaultTheme ? lightTheme : darkTheme);
-  theme = responsiveFontSizes(theme);
 
   return (
     <>
