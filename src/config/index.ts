@@ -1,7 +1,7 @@
 // icons
-import DashboardIcon from "@material-ui/icons/BarChartOutlined";
-import ProfileIcon from "@material-ui/icons/Person";
-import WorkspaceIcon from "@material-ui/icons/Dashboard";
+import DashboardIcon from "@mui/icons-material/BarChartOutlined";
+import ProfileIcon from "@mui/icons-material/Person";
+import WorkspaceIcon from "@mui/icons-material/Dashboard";
 // components
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
