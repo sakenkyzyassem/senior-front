@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "@mui/material";
+import useToken from './config/useToken';
 
 // components
 import Layout from "./components/Layout";
@@ -27,6 +28,11 @@ const DefaultComponent = () => <div>No Component Defined.</div>;
 
 function App() {
   // const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
+  const { token, setToken } = useToken();
+
+  if( !token ) {
+    return <Login setToken={setToken} />
+  }
 
   return (
     <>
@@ -38,7 +44,7 @@ function App() {
           <Router>
             <Switch>
               <Route path="/login">
-                <Login />
+                <Login setToken={setToken} />
               </Route>
               <Layout>
                 {/* for each route config, a react route is created */}
