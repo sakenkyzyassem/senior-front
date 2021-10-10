@@ -15,7 +15,7 @@ export const Cards = ({title, name, description}: Props) => {
   );
     return (
         //will need to map through all the courses and generate the following card for each
-        <Card sx={{ mr: 15, ml: 15, mb: 20 }} elevation={2}>
+        <Card sx={{ mx: 15, mb: 20 }} elevation={2}>
             <CardContent>
                 <Typography 
                     variant={"h6"}

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "@mui/material";
@@ -26,7 +26,7 @@ const AppContext = React.createContext(null);
 const DefaultComponent = () => <div>No Component Defined.</div>;
 
 function App() {
-  const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
+  // const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
 
   return (
     <>
@@ -40,7 +40,7 @@ function App() {
               <Route path="/login">
                 <Login />
               </Route>
-              <Layout toggleTheme={toggle} useDefaultTheme={useDefaultTheme}>
+              <Layout>
                 {/* for each route config, a react route is created */}
                 {routes.map((route: RouteItem) =>
                   route.subRoutes ? (

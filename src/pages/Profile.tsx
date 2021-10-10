@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 import { Helmet } from "react-helmet";
 import { Typography } from "@mui/material";
-import styled from 'styled-components';
+import { Box } from "@mui/system";
 
 // components
 
@@ -11,15 +11,6 @@ import { UserProfilePageData } from "../utils/types";
 import React from "react";
 
 // define css-in-js
-const Root = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;`;
-const Row = styled.div`
-  flex: auto;
-  align-items: center;
-  justify-content: center;`;
 
 let userMockData: UserProfilePageData = {
   firstname: 'Madi',
@@ -53,13 +44,21 @@ const Dashboard: FC<{}> = (): ReactElement => {
           {PAGE_TITLE_PROFILE} | {APP_TITLE}
         </title>
       </Helmet>
-      <Root>
-        <Row>
+      <Box sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center"}}>
+        <Box sx={{
+          flex: "auto",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
           <Typography variant={"h6"} gutterBottom>
             {`${userMockData.firstname} ${userMockData.middlename ?? ''} ${userMockData.secondname}` }
           </Typography>
-        </Row>
-      </Root>
+        </Box>
+      </Box>
     </>
   );
 };

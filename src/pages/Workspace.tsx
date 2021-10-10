@@ -1,3 +1,4 @@
+import React from "react";
 import { FC, ReactElement, useState } from "react";
 import { Helmet } from "react-helmet";
 import {
@@ -6,23 +7,19 @@ import {
   ListItem,
   Tooltip
 } from "@mui/material";
+import { Box } from "@mui/system";
 import styled from 'styled-components';
 
 //icons
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
 // components
+import { Cards } from "../components/Cards";
+import WorkspaceMenuItem from "../components/WorkspaceMenuItem";
 
 // constants
 import { WorkspaceMeta } from "../utils/types";
-import React from "react";
-import { Cards } from "../components/Cards";
-import { ExpandMore, ExpandLess } from "@mui/icons-material";
-import WorkspaceMenuItem from "../components/WorkspaceMenuItem";
 
 // define css-in-js
-const Root = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center`;
 const CardsContainer = styled.div`flex: 3`;
 const ButtonContainer = styled.div`flex: 1`;
 
@@ -55,7 +52,10 @@ const Workspace: FC<{}> = (): ReactElement => {
           Workspace Page
         </title>
       </Helmet>
-      <Root>
+      <Box sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"}}>
         <CardsContainer>
           <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
         </CardsContainer> 
@@ -78,7 +78,7 @@ const Workspace: FC<{}> = (): ReactElement => {
             </Collapse>
           </List>
         </ButtonContainer>
-      </Root>
+      </Box>
     </>
   );
 };

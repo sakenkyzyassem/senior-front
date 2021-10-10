@@ -1,65 +1,60 @@
 // import clsx from "clsx";
-import { IconButton, Drawer, Toolbar } from "@mui/material";
+import { IconButton, Drawer as MuiDrawer, Toolbar } from "@mui/material";
 // import { createStyles, makeStyles } from '@mui/styles';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import styled from 'styled-components';
 
 // components
 import AppMenu from "./AppMenu";
 
 // constants
-// import { DRAWER_WIDTH } from "../utils/constants";
+import { DRAWER_WIDTH } from "../utils/constants";
 import React from "react";
-
-// define css-in-js
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     drawer: {
-//       width: DRAWER_WIDTH,
-//       flexShrink: 0,
-//       whiteSpace: "nowrap",
-//     },
-//     drawerOpen: {
-//       width: DRAWER_WIDTH,
-//       transition: theme.transitions.create("width", {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.enteringScreen,
-//       }),
-//     },
-//     drawerClose: {
-//       transition: theme.transitions.create("width", {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.leavingScreen,
-//       }),
-//       overflowX: "hidden",
-//       width: theme.spacing(7) + 1,
-//       [theme.breakpoints.up("sm")]: {
-//         width: theme.spacing(9) + 1,
-//       },
-//     },
-//   })
-// );
 
 // define interface to represent component props
 interface NavigationProps {
   open: boolean;
-  handleMenuClose: () => void;
+  handleMenuToggle: () => void;
 }
 
-const Navigation = ({ handleMenuClose }: NavigationProps) => {
-  // const classes = useStyles();
+const Drawer = styled(MuiDrawer)(
+  ({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+      position: 'relative',
+      whiteSpace: 'nowrap',
+      width: DRAWER_WIDTH,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      boxSizing: 'border-box',
+      ...(!open && {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up('sm')]: {
+          width: theme.spacing(9),
+        },
+      }),
+    },
+  }),
+);
+
+const Navigation = ({open, handleMenuToggle }: NavigationProps) => {
   return (
-    <Drawer anchor="left"
-      variant="permanent"
-    >
+    <Drawer open={open} variant="permanent">
       <Toolbar sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-end",
-        padding: "spacing(0, 1)",
-        background: 'primary.main',
+        backgroundColor: 'primary.main',
+        px: [1],
       }}>
-        <IconButton onClick={handleMenuClose} size="large">
-          <ChevronLeftIcon htmlColor="#fff" />
+        <IconButton onClick={handleMenuToggle} size="large">
+          <ChevronLeftIcon sx={{color: (theme) => theme.palette.background.default}}/>
         </IconButton>
       </Toolbar>
       <AppMenu />

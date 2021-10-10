@@ -34,7 +34,7 @@ const MenuItem = ({ route, selected }: MenuItemProps) => {
           transition: "box-shadow",
           transitionDuration: "1s",
           fontWeight: "bolder",
-          backgroundColor: 'action.hover'
+          backgroundColor: (theme) => theme.palette.action.hover
         } : {}}>
           <ListItemIcon>
             <IconButton size="small">
