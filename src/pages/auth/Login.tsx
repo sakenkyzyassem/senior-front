@@ -11,11 +11,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../../theme/appTheme';
 
 import { UserToken } from '../../config/useToken';
-
-const theme = createTheme();
 
 interface LoginProps {
     setToken: (value: UserToken) => void;
@@ -74,16 +73,16 @@ const Login = ({setToken}: LoginProps) => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              placeholder="Email Address"
               name="email"
               autoComplete="email"
             />
             <TextField
               margin="normal"
               required
-              fullWidth
+              fullWidth 
               name="password"
-              label="Password"
+              placeholder="Password"
               type="password"
               id="password"
               autoComplete="current-password"
