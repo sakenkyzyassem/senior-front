@@ -19,3 +19,16 @@ export interface UserProfilePageData {
     skills: string[];
     workspaces: WorkspaceMeta[];
 }
+
+export interface TeamsMeta {
+    name: string,
+    participants: string[],
+    id: string
+}
+
+export interface UserMeta {
+    id: string,
+    name: string,
+    typeOfUser: string,
+    teamId?: string,
+}

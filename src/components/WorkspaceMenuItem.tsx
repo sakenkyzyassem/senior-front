@@ -1,32 +1,27 @@
 import React from "react";
 import { ListItem, ListItemText, ListItemIcon, Icon, Tooltip, IconButton } from "@mui/material";
-import DefaultIcon from "@mui/icons-material/FileCopy";
+import ProfileIcon from '@mui/icons-material/AccountCircle';
+import TeamIcon from '@mui/icons-material/Group';
 
-interface MenuItemProps {
+interface WorkspaceMenuItemProps {
   selected: boolean;
+  isTeam: boolean;
 }
 
 // functional component
-const WorkspaceMenuItem = ({ selected }: MenuItemProps) => {
-  // const location = useLocation();
+const WorkspaceMenuItem = ({ selected, isTeam }: WorkspaceMenuItemProps) => {
 
   return (
       <Tooltip title={"item1"} placement="right">
         <ListItem button disabled={false} sx={selected ? {
-          transition: "box-shadow",
-          transitionDuration: "1s",
           fontWeight: "bolder",
-          backgroundColor: "action.hover"
         }: {}}>
           <ListItemIcon>
-            <IconButton
-              
-              size="small"
-            >
-              <Icon component={DefaultIcon} />
+            <IconButton size="small">
+              <Icon component={isTeam ? TeamIcon : ProfileIcon} />
             </IconButton>
           </ListItemIcon>
-          <ListItemText primary={"text"} />
+          <ListItemText primary={isTeam ? "Team 1" : "Mark Twan"}/>
         </ListItem>
       </Tooltip>
   );

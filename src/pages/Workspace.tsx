@@ -25,25 +25,40 @@ const ButtonContainer = styled.div`flex: 1`;
 
 const mockData: WorkspaceMeta[] = [
   {
-    title: "CSCI 390",
-    name: "Artificial Intelligence",
-    description: "Just a course",
+    title: "Web Application",
+    name: "Shopping Mall Appp",
+    description: "Proposal by Prof",
     id: 'workspace001'
   },
-  {
-    title: "CSCI 269",
-    name: "Human Intelligence",
-    description: "Mock a course",
-    id: 'workspace002'
-  }
 ];
 
+/*const mockTeams: TeamsMeta[] = [
+  {
+    name: "Team 1",
+    participants: ["Dana, Aisana, Assem, Meir, Azamat"],
+    id: 'team1'
+  },
+  {
+    name: "Team 2",
+    participants: ["Dana, Aisana, Assem, Meir, Azamat"],
+    id: 'team2'
+  }
+];*/
+
 const Workspace: FC<{}> = (): ReactElement => {
-  const [open, setOpen] = useState(false);
+  const [openParticipants, setOpenParticipants] = useState(false);
+  const [openAllTeams, setOpenAllTeams] = useState(false);
+  const [openMyTeams, setOpenMyTeams] = useState(false);
   const slctd  = true;
 
-  const handleClick = (): void => {
-    setOpen(!open);
+  const handleClickParticipants = (): void => {
+    setOpenParticipants(!openParticipants);
+  };
+  const handleClickAllTeams = (): void => {
+    setOpenAllTeams(!openAllTeams);
+  };
+  const handleClickMyTeams = (): void => {
+    setOpenMyTeams(!openMyTeams);
   };
   return (
     <>
@@ -57,24 +72,47 @@ const Workspace: FC<{}> = (): ReactElement => {
         justifyContent: "space-between",
         alignItems: "center"}}>
         <CardsContainer>
+          <h3>Proposals</h3>
           <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
         </CardsContainer> 
         <ButtonContainer>
           <Button variant="contained" fullWidth>Create new workspace</Button>
           <List>
-            <ListItem button onClick={handleClick}>
+            <ListItem button onClick={handleClickParticipants}>
               <Tooltip
-                title={`${open ? "Collapse" : "Expand"}`}
+                title={`${openParticipants ? "Collapse" : "Expand"}`}
                 placement="bottom"
               >
-                {open ? <ExpandMore /> : <ExpandLess />}
+                {openParticipants ? <ExpandMore /> : <ExpandLess />}
               </Tooltip>
               Participants
             </ListItem>
-            <Collapse in={open}>
-              <WorkspaceMenuItem selected={slctd}/>
-              <WorkspaceMenuItem selected={slctd}/>
-              <WorkspaceMenuItem selected={slctd}/>
+            <Collapse in={openParticipants}>
+              <WorkspaceMenuItem isTeam={false} selected={slctd}/>
+            </Collapse>
+            <ListItem button onClick={handleClickAllTeams}>
+              <Tooltip
+                  title={`${openAllTeams ? "Collapse" : "Expand"}`}
+                  placement="bottom"
+              >
+                {openAllTeams ? <ExpandMore /> : <ExpandLess />}
+              </Tooltip>
+              All teams
+            </ListItem>
+            <Collapse in={openAllTeams}>
+              <WorkspaceMenuItem isTeam={true} selected={slctd}/>
+            </Collapse>
+            <ListItem button onClick={handleClickMyTeams}>
+              <Tooltip
+                  title={`${openMyTeams ? "Collapse" : "Expand"}`}
+                  placement="bottom"
+              >
+                {openMyTeams ? <ExpandMore /> : <ExpandLess />}
+              </Tooltip>
+              My teams
+            </ListItem>
+            <Collapse in={openMyTeams}>
+              <WorkspaceMenuItem isTeam={true} selected={slctd}/>
             </Collapse>
           </List>
         </ButtonContainer>
