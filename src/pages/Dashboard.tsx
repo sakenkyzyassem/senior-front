@@ -67,6 +67,8 @@ const Dashboard: FC<{}> = (): ReactElement => {
         name: title,
         descr: descr,
       });
+
+      handleClose();
     }
 };
 
