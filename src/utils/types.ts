@@ -32,3 +32,9 @@ export interface UserMeta {
     typeOfUser: string,
     teamId?: string,
 }
+
+export interface WorkspaceData {
+    title: string,
+    name: string,
+    descr: string,
+}
