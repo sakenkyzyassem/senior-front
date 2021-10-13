@@ -27,6 +27,8 @@ const AppContext = React.createContext(null);
 // default component
 const DefaultComponent = () => <div>No Component Defined.</div>;
 
+import "bootstrap/dist/css/bootstrap.css";
+
 function getRoute(item: RouteItem) {
   return item.protected ?
     <ProtectedRoute

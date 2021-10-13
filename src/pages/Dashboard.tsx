@@ -82,7 +82,6 @@ const Dashboard: FC<{}> = (): ReactElement => {
       <Box sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
       }}>
         <CardsContainer>
           <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
