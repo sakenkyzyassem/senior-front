@@ -76,7 +76,7 @@ const Workspace: FC<{}> = (): ReactElement => {
           <Cards title={mockData[0].title} name={mockData[0].name} description={mockData[0].description} />
         </CardsContainer> 
         <ButtonContainer>
-          <Button variant="contained" fullWidth>Create new workspace</Button>
+          <Button variant="contained" fullWidth>Create new proposal</Button>
           <List>
             <ListItem button onClick={handleClickParticipants}>
               <Tooltip

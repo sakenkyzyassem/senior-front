@@ -15,9 +15,10 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme/appTheme';
 
 import { UserToken } from '../../config/useToken';
+import { useHistory } from "react-router";
 
 interface LoginProps {
-    setToken: (value: UserToken) => void;
+  setToken: (value: UserToken) => void;
 }
 
 interface UserLoginCredentials {
@@ -34,20 +35,23 @@ async function loginUser(credentials: UserLoginCredentials) {
     }
 }
 
-const Login = ({setToken}: LoginProps) => {    
-  
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        const email = data.get('email')?.toString();
-        const password = data.get('password')?.toString();
+const Login = ({setToken}: LoginProps) => {
 
-        if( email && password ) {
-            const token = await loginUser({email, password});
-            setToken({token});
-        }
-    };
+  const history = useHistory();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+    const email = data.get('email')?.toString();
+    const password = data.get('password')?.toString();
+
+    if( email && password ) {
+      const token = await loginUser({email, password});
+      setToken({token});
+      history.push("/");
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -55,7 +59,7 @@ const Login = ({setToken}: LoginProps) => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 16,
+            my: 12,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -92,6 +96,7 @@ const Login = ({setToken}: LoginProps) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => handleSubmit}
             >
               Sign In
             </Button>

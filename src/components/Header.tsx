@@ -10,6 +10,7 @@ import {
 // constants
 import { APP_TITLE, DRAWER_WIDTH } from "../utils/constants";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 // define interface to represent component props
 interface HeaderProps {
@@ -19,12 +20,29 @@ interface HeaderProps {
   useDefaultTheme?: boolean;
 }
 
+async function logoutUser() {
+  await setTimeout(() => {}, 500);
+  const tokenString = localStorage.getItem('token');
+  if( tokenString ){
+    localStorage.removeItem("token");
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const Header = ({ open, handleMenuToggle, }: HeaderProps) => {
   const [profileAnchor, setprofileAnchor] = useState(null);
+  const history = useHistory();
 
   const openProfilePopover = (event: any) => {
     setprofileAnchor(event.currentTarget);
   }
+
+  const logout = async () => {
+    await logoutUser();
+    history.push("/login");
+  } 
 
   return (
     <AppBar position="absolute" sx={{
@@ -118,7 +136,7 @@ const Header = ({ open, handleMenuToggle, }: HeaderProps) => {
               }/>
             </MenuItem>
             <MenuItem>
-              <Button color="primary">Log out</Button>
+              <Button color="primary" onClick={logout}>Log out</Button>
             </MenuItem>
           </Menu>
         </Popover>

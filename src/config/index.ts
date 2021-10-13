@@ -21,6 +21,7 @@ export const routes: Array<RouteItem> = [
     component: Dashboard,
     icon: DashboardIcon,
     appendDivider: true,
+    protected: true,
   },
   {
     key: "router-profile",
@@ -30,6 +31,7 @@ export const routes: Array<RouteItem> = [
     enabled: true,
     component: Profile,
     icon: ProfileIcon,
+    protected: true,
   },
   {
     key: "router-workspace",
@@ -38,5 +40,6 @@ export const routes: Array<RouteItem> = [
     enabled: true,
     component: Workspace,
     icon: WorkspaceIcon,
+    protected: true,
   },
 ];
