@@ -103,8 +103,7 @@ const Dashboard: FC<{}> = (): ReactElement => {
                 required
                 name="abbr"
                 id="abbr"
-                label="Abbreviation"
-                placeholder="e.g. CSCI 290"
+                placeholder="Abbreviation"
                 helperText="Enter an abbreviation for a workspace"
                 sx={{
                   mt: 1,
@@ -115,8 +114,7 @@ const Dashboard: FC<{}> = (): ReactElement => {
                 required
                 name="title"
                 id="title"
-                label="Title"
-                placeholder="e.g. Artificial Intelligence"
+                placeholder="Title"
                 helperText="Enter a title for a workspace"
                 sx={{
                   mt: 1,
@@ -128,8 +126,7 @@ const Dashboard: FC<{}> = (): ReactElement => {
                 required
                 name="descr"
                 id="descr"
-                label="Description"
-                placeholder="e.g. Course mandatory for 3rd year students"
+                placeholder="Description"
                 helperText="Enter a description for a workspace"
                 sx={{
                   mt: 1,
