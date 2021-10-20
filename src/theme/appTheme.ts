@@ -14,6 +14,9 @@ let theme = createTheme({
     secondary: {
       main: pink[300],
     },
+    error: {
+      main: "#cc0000",
+    }
   },
 });
 

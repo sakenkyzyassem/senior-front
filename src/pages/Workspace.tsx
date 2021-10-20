@@ -5,8 +5,11 @@ import {
   Button, Collapse,
   List,
   ListItem,
+  Popover,
   TextField,
-  Tooltip
+  Tooltip,
+  Menu,
+  MenuItem
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Typography from '@mui/material/Typography';
@@ -24,6 +27,9 @@ import WorkspaceMenuItem from "../components/WorkspaceMenuItem";
 
 // constants
 import { WorkspaceMeta } from "../utils/types";
+import EditTitle from "../components/EditTitle";
+import EditDescr from "../components/EditDescr";
+import DeleteWorkspace from "../components/DeleteWorkspace";
 
 // define css-in-js
 
@@ -61,6 +67,10 @@ const Workspace: FC<{}> = (): ReactElement => {
   const [openAllTeams, setOpenAllTeams] = useState(false);
   const [openMyTeams, setOpenMyTeams] = useState(false);
   const [openInviteModal, setOpenInviteModal] = useState(false);
+  const [settingsAnchor, setSettingsAnchor] = useState(null);
+  const [openEditTitle, setOpenEditTitle] = useState(false);
+  const [openEditDescr, setOpenEditDescr] = useState(false);
+  const [openDeleteWorkspace, setOpenDeleteWorkspace] = useState(false)
   const slctd  = true;
 
   const handleClickParticipants = (): void => {
@@ -81,6 +91,28 @@ const Workspace: FC<{}> = (): ReactElement => {
   const handleSubmit = (): void => {
     console.log('submit')
   };
+  const openSettingsPopover = (event: any): void => {
+    setSettingsAnchor(event.currentTarget);
+  }
+  const handleEditTitleOpen = (): void => {
+    setOpenEditTitle(true);
+  }
+  const handleEditTitleClose = (): void => {
+    setOpenEditTitle(false);
+  }
+  const handleEditDescrOpen = (): void => {
+    setOpenEditDescr(true);
+  }
+  const handleEditDescrClose = (): void => {
+    setOpenEditDescr(false);
+  }
+  const handleDeleteWorkspaceOpen = (): void => {
+    setOpenDeleteWorkspace(true);
+  }
+  const handleDeleteWorkspaceClose = (): void => {
+    setOpenDeleteWorkspace(false);
+  }
+
   return (
     <>
       <Helmet>
@@ -122,9 +154,42 @@ const Workspace: FC<{}> = (): ReactElement => {
           justifyContent: "flex-start"}}>
           <Box>
             <Stack direction="row" spacing={2}>
-              <Button variant="outlined" startIcon={<SettingsIcon />}>
+              <Button variant="outlined" startIcon={<SettingsIcon />} onClick={openSettingsPopover}>
                 Settings
               </Button>
+              <Popover
+                open={Boolean(settingsAnchor)}
+                anchorEl={settingsAnchor}
+              >
+                <Menu
+                  id="menu-settings"
+                  anchorEl={settingsAnchor}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(settingsAnchor)}
+                  onClose={() => {setSettingsAnchor(null);}}
+                >
+                  <MenuItem>
+                    <Button color="primary" onClick={handleEditTitleOpen}>Edit title</Button>
+                    <EditTitle open={openEditTitle} handleClose={handleEditTitleClose}></EditTitle>
+                  </MenuItem>
+                  <MenuItem>
+                    <Button color="primary" onClick={handleEditDescrOpen}>Edit description</Button>
+                    <EditDescr open={openEditDescr} handleClose={handleEditDescrClose}></EditDescr>
+                  </MenuItem>
+                  <MenuItem>
+                    <Button color="error" onClick={handleDeleteWorkspaceOpen}>Delete workspace</Button>
+                    <DeleteWorkspace open={openDeleteWorkspace} handleClose={handleDeleteWorkspaceClose}></DeleteWorkspace>
+                  </MenuItem>
+                </Menu>
+              </Popover>
               <Button variant="contained" onClick={handleClickInvite} startIcon={<AddIcon />}>
                 Invite
               </Button>
